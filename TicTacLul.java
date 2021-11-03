@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class TicTacLul {
 
     public static int VelikostPole = 3;
@@ -137,8 +136,7 @@ public class TicTacLul {
 
     public static String nextMovePlayerA(){
         got:
-        //sorry, vím, že je to hrozný tahle podmínka, ale jinak mi nefunguje got, právoplatně mi můžeš odebrat 1 bod za toto, už se to znovu nestane Honzíku
-        if (1<2) {
+        {
             movePlayerA();
             playerInputos = sc.nextInt();
             if(playerInputos>9 || playerInputos<1) {
@@ -158,8 +156,7 @@ public class TicTacLul {
 
     public static String nextMovePlayerB(){
         got:
-        //sorry na druhou
-        if(1<2) {
+        {
             movePlayerB();
             playerInputos = sc.nextInt();
             if(playerInputos>9 || playerInputos<1) {
