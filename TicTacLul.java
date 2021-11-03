@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 public class TicTacLul {
-
+    //Chtěl jsem to udělat na jakoukoliv velikost pole, ale jsem líný hovado a nedodělal jsem to. Na jinou velikost nefunguje checkování jestli hráč vyhrál a remíza
     public static int VelikostPole = 3;
     static Scanner sc = new Scanner(System.in);
     static String[] field;
