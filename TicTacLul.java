@@ -4,19 +4,23 @@ import java.util.*;
 
 public class TicTacLul {
 
-    public static int BOARD_SIZE = 3;
+    public static int BOARD_SIZE = 5;
     static Scanner sc = new Scanner(System.in);
     static String[] field;
     static String winner = null;
     static int countround = 0;
     static int pocether = 0;
+    static int playerInputos;
+    public static boolean isRunning = true;
 
     public static String playerA = "X";
     public static String playerB = "O";
 
     public static void main(String[] args) {
-        do {
+        while(isRunning) {
+
             field = new String[BOARD_SIZE * BOARD_SIZE];
+            //importuje číslíčka do pole
             for (int i = 0; i < field.length; i++) {
                 field[i] = "" + (i + 1);
             }
@@ -30,37 +34,43 @@ public class TicTacLul {
             printfield();
 
             win();
+            //vyhodnocení
             if (winner != null) {
                 System.out.println("Let's gou " + winner + " vyhráli.");
                 novaHra();
             }
-
-        }while(1<2);
-    }
-    public static void novaHra(){
-
-        System.out.println("Chceš hrát další kolesa a křížosky?");
-        Scanner sc = new Scanner(System.in);
-        int proceed;
-        proceed = sc.nextInt();
-        switch (proceed){
-            case 1: {
-                winner = null;
-                countround = 0;
-                pocether++;
-
-                break;
-            }
-            case 2: {
-                
-                return;
-            }
-            default: {
-
-            }
         }
     }
-    static String checkViteza() {
+
+    public static void novaHra(){
+
+            System.out.println("Chceš hrát další kolesa a křížosky? (jedna = ANO, dva = NE, tři = 150 bodů");
+            Scanner sc = new Scanner(System.in);
+            int proceed;
+            proceed = sc.nextInt();
+            switch (proceed) {
+                case 1: {
+                    winner = null;
+                    countround = 0;
+                    pocether++;
+                    break;
+                }
+                case 2: {
+                   isRunning = false;
+                    System.out.println("Program se ukončuje");
+                    break;
+                }
+                case 3:{
+                    System.out.println("Díky Honzíku");
+                    isRunning = false;
+                    break;
+                }
+                default: {
+                }
+            }
+        }
+
+    public static String checkViteza() {
         for (int i = 0; i <= 7; i++) {
             String row = switch (i) {
                 case 0 -> field[0] + field[1] + field[2];
@@ -73,8 +83,6 @@ public class TicTacLul {
                 case 7 -> field[2] + field[4] + field[6];
                 default -> null;
             };
-
-
             if (row.equals("XXX")) {
                 return "Křížosky";
             }
@@ -82,26 +90,17 @@ public class TicTacLul {
                 return "Kolesa";
             }
             else if(i==7){
-                System.out.println("Další kolo lulw");
+                System.out.println("150 BODŮ PLS PLS DÍK");
+                System.out.println("");
             }
-
-
         }
-
         return null;
     }
-
-    public static void movePlayerA() {
-        System.out.println("Hráč " + playerA + " je na řadě");
-
-    }
-
-    public static void movePlayerB() {
-        System.out.println("Hráč " + playerB + " je na řadě");
-    }
-
+    public static void movePlayerA() {System.out.println("Hráč " + playerA + " je na řadě");}
+    public static void movePlayerB() {System.out.println("Hráč " + playerB + " je na řadě");}
 
     public static void printfield() {
+        //výpis a formátování
         for (int i = 0; i < field.length; i++) {
             if(i% BOARD_SIZE == 0){
                 System.out.print("| ");
@@ -117,34 +116,17 @@ public class TicTacLul {
     public static String win() {
 
         while (winner == null) {
-            int playerInputos;
-
-            got:
-
-            if (countround % 2 == 1) {
-                movePlayerA();
-                playerInputos = sc.nextInt();
-                if (field[playerInputos- 1].compareTo(playerB) == 0 || field[playerInputos- 1].compareTo(playerA) == 0) {
-                    countround--;
-                    break got;
-
-                }
-                field[playerInputos - 1] = playerA;
-
-            } else if (countround % 2 == 0) {
-                movePlayerB();
-                 playerInputos = sc.nextInt();
-                if (field[playerInputos- 1].compareTo(playerB) == 0 || field[playerInputos- 1].compareTo(playerA) == 0) {
-                    countround--;
-                    break got;
-                }
-                field[playerInputos - 1] = playerB;
+            if(countround%2==1){
+                nextMovePlayerA();
             }
-
-
+            else if(countround%2==0){
+                nextMovePlayerB();
+            }
             printfield();
             winner = checkViteza();
             countround++;
+
+            //remiza
             if (countround > 8) {
                 System.out.println("Remízos");
                 novaHra();
@@ -157,6 +139,45 @@ public class TicTacLul {
 
         return winner;
     }
+
+    public static String nextMovePlayerA(){
+
+
+        got:
+        //sorry, vím, že je to hrozný tahle podmínka, ale jinak mi nefunguje got, právoplatně mi můžeš odebrat 1 bod za toto, už se to znovu nestane Honzíku
+        if (1<2) {
+            movePlayerA();
+            playerInputos = sc.nextInt();
+            if (field[playerInputos - 1].compareTo(playerB) == 0 || field[playerInputos - 1].compareTo(playerA) == 0) {
+                countround--;
+                System.out.println("Jsi kokýt a neumíš zadávat správně číslíčka");
+                break got;
+            }
+
+            field[playerInputos - 1] = playerA;
+        }
+        return playerA;
+
+
+    }
+
+    public static String nextMovePlayerB(){
+        got:
+        //sorry na druhou
+        if(1<2) {
+            movePlayerB();
+            playerInputos = sc.nextInt();
+            if (field[playerInputos - 1].compareTo(playerB) == 0 || field[playerInputos - 1].compareTo(playerA) == 0) {
+                countround--;
+                System.out.println("Jsi kokýt a neumíš zadávat správně číslíčka");
+                break got;
+            }
+
+            field[playerInputos - 1] = playerB;
+        }
+        return playerB;
+        }
+
 
 }
 
