@@ -1,10 +1,11 @@
-import java.sql.SQLOutput;
-import java.util.*;
+
+
+import java.util.Scanner;
 
 
 public class TicTacLul {
 
-    public static int BOARD_SIZE = 5;
+    public static int VelikostPole = 3;
     static Scanner sc = new Scanner(System.in);
     static String[] field;
     static String winner = null;
@@ -19,7 +20,7 @@ public class TicTacLul {
     public static void main(String[] args) {
         while(isRunning) {
 
-            field = new String[BOARD_SIZE * BOARD_SIZE];
+            field = new String[VelikostPole * VelikostPole];
             //importuje číslíčka do pole
             for (int i = 0; i < field.length; i++) {
                 field[i] = "" + (i + 1);
@@ -44,7 +45,7 @@ public class TicTacLul {
 
     public static void novaHra(){
 
-            System.out.println("Chceš hrát další kolesa a křížosky? (jedna = ANO, dva = NE, tři = 150 bodů");
+            System.out.println("Chceš hrát další kolesa a křížosky? (jedna = ANO, dva = NE, tři = 150 bodů)");
             Scanner sc = new Scanner(System.in);
             int proceed;
             proceed = sc.nextInt();
@@ -102,11 +103,11 @@ public class TicTacLul {
     public static void printfield() {
         //výpis a formátování
         for (int i = 0; i < field.length; i++) {
-            if(i% BOARD_SIZE == 0){
+            if(i% VelikostPole == 0){
                 System.out.print("| ");
             }
             System.out.print(field[i] + " | ");
-            if ((i + 1) % BOARD_SIZE == 0) {
+            if ((i + 1) % VelikostPole == 0) {
                 System.out.println("");
             }
         }
