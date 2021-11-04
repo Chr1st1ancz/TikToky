@@ -96,7 +96,6 @@ public class TicTacLul {
 
     public static void movePlayerA() {System.out.println("Hráč " + playerA + " je na řadě");}
     public static void movePlayerB() {System.out.println("Hráč " + playerB + " je na řadě");}
-    public static void moveAI(){System.out.println("Počítač hraje");}
 
     public static void printfield() {
         //výpis a formátování
@@ -192,15 +191,18 @@ public class TicTacLul {
         }
 
         public static void nextAiMove(){
-            moveAI();
+
+
             got:
             {
+
                 random1 = (int) (Math.random() * 9);
                 if (field[random1].compareTo(playerB) == 0 || field[random1].compareTo(playerA) == 0) {
                     countround--;
                     break got;
                 }
-
+                System.out.println("Počítač hraje:");
+                System.out.println();
                 field[random1] = playerB;
             }
 
