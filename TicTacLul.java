@@ -9,6 +9,8 @@ public class TicTacLul {
     static int pocether = 0;
     static int playerInputos;
     public static boolean isRunning = true;
+    static int vyber = 2;
+    static int random1 = 0;
 
     public static String playerA = "X";
     public static String playerB = "O";
@@ -24,9 +26,13 @@ public class TicTacLul {
             if(pocether==0) {
                 System.out.println("Vítej v ťik ťac tou");
             }
+
             else if(pocether>0){
                 System.out.println("Máš asi hodně boring life, že hraješ tuhle hru, ale tady máš nové poleso");
             }
+            System.out.println("1 - Pro hraní s hráčem");
+            System.out.println("2 - Pro hraní s Počítačem");
+            vyber = sc.nextInt();
             printfield();
             win();
             //vyhodnocení
@@ -40,7 +46,6 @@ public class TicTacLul {
     public static void novaHra(){
 
             System.out.println("Chceš hrát další kolesa a křížosky? (jedna = ANO, dva = NE, tři = 150 bodů)");
-            Scanner sc = new Scanner(System.in);
             int proceed;
             proceed = sc.nextInt();
         switch (proceed) {
@@ -91,11 +96,12 @@ public class TicTacLul {
 
     public static void movePlayerA() {System.out.println("Hráč " + playerA + " je na řadě");}
     public static void movePlayerB() {System.out.println("Hráč " + playerB + " je na řadě");}
+    public static void moveAI(){System.out.println("Počítač hraje");}
 
     public static void printfield() {
         //výpis a formátování
         for (int i = 0; i < field.length; i++) {
-            if(i% VelikostPole == 0){
+            if(i % VelikostPole == 0){
                 System.out.print("| ");
             }
             System.out.print(field[i] + " | ");
@@ -109,12 +115,23 @@ public class TicTacLul {
     public static String win() {
 
         while (winner == null) {
-            if(countround%2==1){
-                nextMovePlayerA();
+            if(vyber==1) {
+                if (countround % 2 == 1) {
+                    nextMovePlayerA();
+                } else if (countround % 2 == 0) {
+                    nextMovePlayerB();
+                }
             }
-            else if(countround%2==0){
-                nextMovePlayerB();
+
+            else if(vyber == 2){
+                if (countround % 2 == 1) {
+                    nextMovePlayerA();
+                }
+                else if(countround % 2 ==0){
+                    nextAiMove();
+                }
             }
+
             printfield();
             winner = checkViteza();
             countround++;
@@ -172,6 +189,24 @@ public class TicTacLul {
             field[playerInputos - 1] = playerB;
         }
         return playerB;
+        }
+
+        public static void nextAiMove(){
+            moveAI();
+            got:
+            {
+                random1 = (int) (Math.random() * 9);
+                if (field[random1].compareTo(playerB) == 0 || field[random1].compareTo(playerA) == 0) {
+                    countround--;
+                    break got;
+                }
+
+                field[random1] = playerB;
+            }
+
+
+
+
         }
 }
 
