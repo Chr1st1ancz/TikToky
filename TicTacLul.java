@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class TicTacLul {
-
+  //Chtěl jsem to původně udělat na jakoukoliv velikost pole, ale musel bych předělat checkování výherních kombinací a systém remízy aby to fungovalo
+  // jak má i na jiný velikosti pole než 3x3 a na to jsem moc línej a už byt rád šel spát, příště se polepším :)
     public static int VelikostPole = 3;
     static Scanner sc = new Scanner(System.in);
     static String[] field;
@@ -189,7 +190,7 @@ public class TicTacLul {
         }
         return playerB;
         }
-
+        //Je 1:44 ráno, tak doufám, že to somehow funguje, moc jsem to nezkoušel, je mi líto Honzíku
         public static void nextAiMove(){
 
 
@@ -205,10 +206,6 @@ public class TicTacLul {
                 System.out.println();
                 field[random1] = playerB;
             }
-
-
-
-
         }
 }
 
